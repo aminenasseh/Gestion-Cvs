@@ -10,8 +10,11 @@ import javax.ejb.TransactionAttributeType;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
+import monpkg.entities.Activity;
 import monpkg.entities.Person;
 
 @Stateless
@@ -35,8 +38,8 @@ public class PersonManager {
 		return em.createQuery("SELECT p FROM Person p", Person.class).getResultList();
 	}
 
-	public Person findOnePerson(Person person) {
-		return em.find(Person.class, person.getIdPerson());
+	public Person findOnePerson(long idPerson) {
+		return em.find(Person.class, idPerson);
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
@@ -48,21 +51,20 @@ public class PersonManager {
 		}
 	}
 
-	// @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
-	public void deletePerson(Person person) {
-		Person p = em.find(Person.class, person.getIdPerson());
-		if (p != null) {
-			em.remove(p);
-		}
-	}
+	public List<Activity> findActivtiesPerson(Person person) {
+		Query query = null;
+		if (person.getIdPerson() != null) {
 
-	// @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
-	public void createPerson(Person person) {
-		if (em.find(Person.class, person.getIdPerson()) == null) {
-			em.persist(person);
-		} else {
-			em.merge(person);
+			try {
+				query = em.createQuery("SELECT a FROM Activity a WHERE a.person.idPerson=" + person.getIdPerson() + "");
+			} catch (Exception e) {
+			}
+			if (query != null) {
+				return query.getResultList();
+			}
 		}
+		return null;
 	}
+	
 
 }

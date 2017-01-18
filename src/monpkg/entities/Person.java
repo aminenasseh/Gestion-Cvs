@@ -17,7 +17,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "PERSON")
+@Table(name = "persons")
 public class Person implements Serializable {
 
 	/**
@@ -43,7 +43,7 @@ public class Person implements Serializable {
 	private String password;
 
 	@OneToMany(mappedBy = "person", cascade = { CascadeType.MERGE, CascadeType.REMOVE})
-	@JoinTable(name = "PERSON_ACTIVITIES")
+	@JoinTable(name = "person_activities")
 	private Set<Activity> activities = new HashSet<Activity>();
 
 	public Integer getIdPerson() {

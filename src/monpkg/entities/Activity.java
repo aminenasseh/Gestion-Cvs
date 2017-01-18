@@ -4,8 +4,9 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,8 +17,8 @@ import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "ACTIVITIES", uniqueConstraints = {
-		@UniqueConstraint(name = "activities_fk", columnNames = { "year", "nature" }) })
+@Table(name = "activities", uniqueConstraints = {
+		@UniqueConstraint(name = "activitiy_fk", columnNames = { "year", "nature" }) })
 public class Activity implements Serializable {
 
 	/**
@@ -30,17 +31,14 @@ public class Activity implements Serializable {
 	private Integer idActivity;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "year")
 	private Date year;
-
-	@Column(name = "nature")
-	private String nature;
 	
-	@Column(name = "title")
+    @Enumerated(EnumType.STRING)
+	private Nature nature;
+    
 	private String title;
-	
-	@Column(name = "description")
 	private String description;
+	private String webAddress;
 
 	@ManyToOne(cascade = { CascadeType.MERGE })
 	private Person person;
@@ -61,11 +59,11 @@ public class Activity implements Serializable {
 		this.year = year;
 	}
 
-	public String getNature() {
+	public Nature getNature() {
 		return nature;
 	}
 
-	public void setNature(String nature) {
+	public void setNature(Nature nature) {
 		this.nature = nature;
 	}
 
@@ -83,6 +81,14 @@ public class Activity implements Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getWebAddress() {
+		return webAddress;
+	}
+
+	public void setWebAddress(String webAddress) {
+		this.webAddress = webAddress;
 	}
 
 	public Person getPerson() {
