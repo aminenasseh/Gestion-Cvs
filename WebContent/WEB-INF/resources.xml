@@ -1,0 +1,10 @@
+<resources>
+	<Resource id="mysqlDS" type="DataSource">
+		JdbcDriver com.mysql.jdbc.Driver
+		dbcUrl jdbc:mysql://localhost:3307/gestion_cv
+		UserName root
+		Password
+		JtaManaged true
+	</Resource>
+</resources>
+
