@@ -44,10 +44,10 @@ public class PersonManager {
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public void savePerson(Person p) {
-		if (p.getIdPerson() == null) {
+		if (em.find(Person.class, p.getIdPerson()) == null) {
 			em.persist(p);
 		} else {
-			p = em.merge(p);
+			em.merge(p);
 		}
 	}
 
@@ -65,6 +65,5 @@ public class PersonManager {
 		}
 		return null;
 	}
-	
 
 }

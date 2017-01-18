@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import javax.ejb.EJB;
 import javax.ejb.embeddable.EJBContainer;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import monpkg.entities.Person;
