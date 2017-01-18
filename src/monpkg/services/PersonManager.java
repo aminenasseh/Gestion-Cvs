@@ -66,4 +66,18 @@ public class PersonManager {
 		return null;
 	}
 
+	public List<Activity> findByTitle(String title) {
+		Query query = null;
+		try {
+			query = em.createQuery("SELECT a FROM Activity a WHERE a.title LIKE'%" + title + "%'");
+		} catch (NoResultException e) {
+			return null;
+		}
+		if (query != null) {
+
+			return (List<Activity>) query.getResultList();
+		}
+		return null;
+	}
+
 }

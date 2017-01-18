@@ -8,16 +8,20 @@ import java.sql.SQLException;
 import javax.ejb.EJB;
 import javax.ejb.embeddable.EJBContainer;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import monpkg.entities.Person;
+import monpkg.services.ActivityManager;
 import monpkg.services.PersonManager;
 
 public class TestPersonManager {
 
 	@EJB
 	PersonManager personManager;
-	Person person = new Person();
+
+	@EJB
+	ActivityManager activityManager;
 
 	public TestPersonManager() throws Exception {
 		EJBContainer.createEJBContainer().getContext().bind("inject", this);
@@ -25,19 +29,10 @@ public class TestPersonManager {
 		assertNotNull(personManager);
 	}
 
-	// @Before
-	// public void setUp() throws Exception {
+	@Before
+	public void setUp() throws Exception {
 
-	// assertNotNull(personManager);
-	// person.setName("NASSEH");
-	// person.setFirstName("Mohamed Amine");
-	// person.setEmail("mohamedamine.nasseh@gmail.com");
-	// person.setWebSite("aminenasseh.com");
-	// person.setBirthday(new Date());
-	// person.setPassword("123");
-	// personManager.savePerson(person);
-
-	// }
+	}
 
 	// @Test
 	// public void testCreatePerson() throws Exception {
@@ -63,5 +58,25 @@ public class TestPersonManager {
 		assertNotNull(personManager.findPersons());
 		assertEquals(2, personManager.findPersons().size());
 	}
+
+	// @Test
+	// public void testUpdatePerson() throws Exception {
+	// Person findPerson = personManager.findOnePerson(1);
+	// assertNotNull(findPerson);
+	// findPerson.setEmail("amine@gmail.com");
+	// personManager.savePerson(findPerson);
+	// assertEquals("amine@gmail.com", findPerson.getEmail());
+	//
+	// }
+
+	// @Test
+	// public void findActivtiesPerson() throws SQLException {
+	// Person findPerson = personManager.findOnePerson(1);
+	// Person findPersonB = personManager.findOnePerson(1);
+	// List<Activity> findPerson2 =
+	// personManager.findActivtiesPerson(findPerson);
+	// // assertNotNull(personManager.findActivtiesPerson(findPerson));
+	// assertEquals("Analyse des besoins", findPerson2.toString());
+	// }
 
 }

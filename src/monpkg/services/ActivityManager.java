@@ -16,6 +16,7 @@ import javax.persistence.Query;
 import javax.sql.DataSource;
 
 import monpkg.entities.Activity;
+import monpkg.entities.Person;
 
 @Stateful
 @TransactionManagement(TransactionManagementType.CONTAINER)
