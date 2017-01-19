@@ -38,8 +38,8 @@ public class PersonManager {
 		return em.createQuery("SELECT p FROM Person p", Person.class).getResultList();
 	}
 
-	public Person findOnePerson(long idPerson) {
-		return em.find(Person.class, idPerson);
+	public Person findOnePerson(Person person) {
+		return em.find(Person.class, person.getIdPerson());
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
@@ -74,7 +74,6 @@ public class PersonManager {
 			return null;
 		}
 		if (query != null) {
-
 			return (List<Activity>) query.getResultList();
 		}
 		return null;

@@ -1,0 +1,55 @@
+h1 {
+	border-bottom: solid 1px blue;
+}
+
+table {
+	border-collapse: collapse;
+	border: 1px solid black;
+}
+
+td, th {
+	border: 1px solid black;
+	padding: 3px;
+}
+
+#page {
+	width: 800px;
+	margin: 0 auto;
+}
+
+#header {
+	border: solid 1px blue;
+	padding: 5px;
+	size: large;
+	color: blue;
+	background-color: #c8bfbf;
+	margin-bottom: 20px;
+}
+
+#menu {
+	float: right;
+	width: 150px;
+	border: solid 1px gray;
+	padding: 5px;
+	color: blue;
+	background-color: white;
+	margin-left: 20px;
+}
+
+#content {
+	
+}
+
+#footer {
+	border: solid 1px blue;
+	padding: 5px;
+	size: small;
+	color: blue;
+	background-color: #c8bfbf;
+	margin-top: 20px;
+}
+
+.alert {
+	color: red;
+	border: solid 2px red;
+}
