@@ -57,21 +57,21 @@ public class TestActivityManager {
 	/**
 	 * Test save activity.
 	 */
-	// @Test
-	// public void testSaveActivity() {
-	// Activity activity = new Activity();
-	// activity.setYear(new Date());
-	// activity.setNature(Nature.EXPERIENCES_PROFESSIONNELLES);
-	// activity.setTitle("Développeur application Hybride");
-	// activity.setDescription("Analyse des besoins");
-	// activity.setWebAddress("https://github.com/aminenasseh/Gestion-Cvs");
-	// Person person = new Person();
-	// Person findPerson = new Person();
-	// person.setIdPerson(1);
-	// findPerson = personManager.findOnePerson(person);
-	// activity.setPerson(findPerson);
-	// activityManager.saveActivity(activity);
-	// }
+	@Test
+	public void testSaveActivity() {
+		Activity activity = new Activity();
+		activity.setYear(new Date());
+		activity.setNature(Nature.EXPERIENCES_PROFESSIONNELLES);
+		activity.setTitle("Développeur application Hybride");
+		activity.setDescription("Analyse des besoins");
+		activity.setWebAddress("https://github.com/aminenasseh/Gestion-Cvs");
+		Person person = new Person();
+		Person findPerson = new Person();
+		person.setIdPerson(1);
+		findPerson = personManager.findOnePerson(person);
+		activity.setPerson(findPerson);
+		activityManager.saveActivity(activity);
+	}
 
 	/**
 	 * Test find one activity.
@@ -88,8 +88,19 @@ public class TestActivityManager {
 	@Test
 	public void testFindActivity() {
 		assertNotNull(activityManager.findActivities());
-		assertEquals(6, activityManager.findActivities().size());
+		assertEquals(2, activityManager.findActivities().size());
 	}
+
+	/**
+	 * Test delete one activity.
+	 * @expected delete one activity
+	 */
+	 @Test
+	 public void testdeleteOneActivity() {
+	 Activity activity = activityManager.findOneActivity("Développeur Android");
+	 String titleActivity = activity.getTitle();
+	 activityManager.deleteOneActivity(titleActivity);
+	 }
 
 	/**
 	 * Test login.
@@ -105,7 +116,7 @@ public class TestActivityManager {
 		Activity activity = new Activity();
 		activity.setYear(new Date());
 		activity.setNature(Nature.EXPERIENCES_PROFESSIONNELLES);
-		activity.setTitle("Développeur Android");
+		activity.setTitle("Développeur Java EE");
 		activity.setDescription("Analyse des besoins, développement");
 		activity.setWebAddress("https://github.com/aminenasseh/Gestion-Cvs");
 		activity.setPerson(authPerson);

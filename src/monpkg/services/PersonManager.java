@@ -60,7 +60,7 @@ public class PersonManager {
 	/**
 	 * Find persons.
 	 *
-	 * @return the list of persons	
+	 * @return the list of persons
 	 */
 	public List<Person> findPersons() {
 		return em.createQuery("SELECT p FROM Person p", Person.class).getResultList();
@@ -78,6 +78,13 @@ public class PersonManager {
 			em.persist(person);
 		} else {
 			em.merge(person);
+		}
+	}
+
+	public void deletePerson(Person person) {
+		Person findedPperson = em.find(Person.class, person.getIdPerson());
+		if (findedPperson != null) {
+			em.remove(findedPperson);
 		}
 	}
 

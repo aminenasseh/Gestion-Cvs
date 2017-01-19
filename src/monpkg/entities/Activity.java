@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -32,6 +33,7 @@ public class Activity implements Serializable {
 	private Date year;
 	
     @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "ENUM('FORMATIONS', 'EXPERIENCES_PROFESSIONNELLES', 'COMPETENCES', 'LANGUES', 'CENTRES_DINTERETS')")
 	private Nature nature;
     
 	private String title;

@@ -76,7 +76,7 @@ public class ActivityManager {
 	 * @param title
 	 *            removes the activities given as a parameter title
 	 */
-	public void deleteActivity(String title) {
+	public void deleteOneActivity(String title) {
 		Activity activity = findOneActivity(title);
 		if (activity != null) {
 			em.remove(activity);
