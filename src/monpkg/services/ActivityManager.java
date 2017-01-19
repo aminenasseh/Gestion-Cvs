@@ -2,7 +2,6 @@ package monpkg.services;
 
 import java.util.List;
 
-import javax.annotation.Resource;
 import javax.ejb.Stateful;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
@@ -12,27 +11,32 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.sql.DataSource;
 
 import monpkg.entities.Activity;
 import monpkg.entities.Person;
 
+/**
+ * The Class ActivityManager.
+ */
 @Stateful
 @TransactionManagement(TransactionManagementType.CONTAINER)
 public class ActivityManager {
 
-	@Resource(name = "myDS")
-	private DataSource ds;
-
+	/** 
+	 * 
+	 */
 	@PersistenceContext(unitName = "myMySQLBase")
 	EntityManager em;
 
+	/** The auth person. */
 	private Person authPerson = new Person();
 
 	/**
-	 * 
+	 * Find activities.
+	 *
 	 * @return a list of activities
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Activity> findActivities() {
 		Query query = null;
 		try {
@@ -47,8 +51,10 @@ public class ActivityManager {
 	}
 
 	/**
-	 * 
+	 * Find one activity.
+	 *
 	 * @param title
+	 *            the title
 	 * @return information concerning the activity given as a parameter title
 	 */
 	public Activity findOneActivity(String title) {
@@ -65,26 +71,28 @@ public class ActivityManager {
 	}
 
 	/**
-	 * 
+	 * Delete activity.
+	 *
 	 * @param title
 	 *            removes the activities given as a parameter title
 	 */
 	public void deleteActivity(String title) {
-		Activity a = findOneActivity(title);
-		if (a != null) {
-			em.remove(a);
+		Activity activity = findOneActivity(title);
+		if (activity != null) {
+			em.remove(activity);
 		}
 	}
 
 	/**
-	 * 
-	 * @param Person
-	 *            a save a new activities given as a parameter person
+	 * Update activity.
+	 *
+	 * @param p
+	 *            the p
 	 */
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
-	public void updateActivity(Person p) {
-		if (p != null) {
-			authPerson = p;
+	public void updateActivity(Person person) {
+		if (person != null) {
+			authPerson = person;
 			em.merge(authPerson);
 			em.flush();
 		} else {
@@ -93,25 +101,31 @@ public class ActivityManager {
 	}
 
 	/**
-	 * 
-	 * @param Activity
-	 *            a save a new activities given as a parameter activity
+	 * Save activity.
+	 *
+	 * @param a
+	 *            the a
 	 */
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
-	public void saveActivity(Activity a) {
-		if (em.find(Activity.class, a.getIdActivity()) == null) {
-			em.persist(a);
+	public void saveActivity(Activity activity) {
+		if (em.find(Activity.class, activity.getIdActivity()) == null) {
+			em.persist(activity);
 		} else {
-			em.merge(a);
+			em.merge(activity);
 		}
 	}
 
 	/**
-	 * 
+	 * Login.
+	 *
 	 * @param email
+	 *            the email
 	 * @param password
+	 *            the password
 	 * @return get information concerning the person given as a parameter mail
 	 *         and password
+	 * @throws NoResultException
+	 *             the no result exception
 	 */
 	public Person login(String email, String password) throws NoResultException {
 		Query query = null;
@@ -133,24 +147,20 @@ public class ActivityManager {
 	}
 
 	/**
-	 * 
-	 * @return a Person disconnected
+	 * Gets the auth person.
+	 *
+	 * @return the auth person
 	 */
-	public Person logout() {
-		authPerson.setIdPerson(0);
-		authPerson.setName(null);
-		authPerson.setFirstName(null);
-		authPerson.setBirthday(null);
-		authPerson.setEmail(null);
-		authPerson.setWebSite(null);
-		authPerson.setPassword(null);
-		return authPerson;
-	}
-
 	public Person getAuthPerson() {
 		return authPerson;
 	}
 
+	/**
+	 * Sets the auth person.
+	 *
+	 * @param authPerson
+	 *            the new auth person
+	 */
 	public void setAuthPerson(Person authPerson) {
 		this.authPerson = authPerson;
 	}

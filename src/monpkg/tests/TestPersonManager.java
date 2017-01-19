@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
@@ -18,18 +17,35 @@ import monpkg.entities.Activity;
 import monpkg.entities.Person;
 import monpkg.services.PersonManager;
 
+/**
+ * The Class TestPersonManager.
+ */
 public class TestPersonManager {
 
+	/** The person manager. */
 	@EJB
 	PersonManager personManager;
 
+	/** The person. */
 	Person person = new Person();
 
+	/**
+	 * Instantiates a new test person manager.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
 	public TestPersonManager() throws Exception {
 		EJBContainer.createEJBContainer().getContext().bind("inject", this);
 		assertNotNull(personManager);
 	}
 
+	/**
+	 * Sets the up.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
 	@Before
 	public void setUp() throws Exception {
 		// assertNotNull(personManager);
@@ -42,17 +58,26 @@ public class TestPersonManager {
 		// personManager.savePerson(person);
 	}
 
-	/*
-	 * @Test public void testCreatePerson() throws Exception {
-	 * 
-	 * assertNotNull(personManager); person.setName("RHAZI");
-	 * person.setFirstName("Amine"); person.setEmail("amine.rhazi@gmail.com");
-	 * person.setPassword("123"); person.setWebSite("aminerhazi.com");
-	 * person.setBirthday(new Date()); personManager.savePerson(person); }
+	/**
+	 * Test create person.
 	 */
+	// @Test
+	// public void testCreatePerson() {
+	// assertNotNull(personManager);
+	// person.setName("RHAZI");
+	// person.setFirstName("Amine");
+	// person.setEmail("amine.rhazi@gmail.com");
+	// person.setPassword("123");
+	// person.setWebSite("aminerhazi.com");
+	// person.setBirthday(new Date());
+	// personManager.savePerson(person);
+	// }
 
+	/**
+	 * Test find one person.
+	 */
 	@Test
-	public void testFindOnePerson() throws SQLException {
+	public void testFindOnePerson() {
 		Person person = new Person();
 		Person findPerson = new Person();
 		person.setIdPerson(1);
@@ -60,12 +85,18 @@ public class TestPersonManager {
 		assertEquals("NASSEH", findPerson.getName());
 	}
 
+	/**
+	 * Test find person.
+	 */
 	@Test
-	public void testFindPerson() throws SQLException {
+	public void testFindPerson() {
 		assertNotNull(personManager.findPersons());
 		assertEquals(1, personManager.findPersons().size());
 	}
 
+	/**
+	 * Test update person.
+	 */
 	@Test
 	public void testUpdatePerson() {
 		Person person = new Person();
@@ -77,19 +108,24 @@ public class TestPersonManager {
 		assertTrue(personUp.getEmail().equals("amine.nasseh@gmail.com"));
 	}
 
+	/**
+	 * Find activities person.
+	 */
 	@Test
-	public void findActivtiesPerson() throws SQLException {
+	public void findActivitiesPerson() {
 		Person person = new Person();
 		person.setIdPerson(1);
-		List<Activity> personActivities = personManager.findActivtiesPerson(person);
+		List<Activity> personActivities = personManager.findActivitiesPerson(person);
 		assertEquals("Analyse des besoins", personActivities.get(0).getDescription());
 	}
 
+	/**
+	 * Find by title.
+	 */
 	@Test
-	 public void findByTitle() throws SQLException {
-	 List<Activity> personActivities = personManager.findByTitle("Développeur application Hybride");
-	 assertEquals("Développeur application Hybride",
-	 personActivities.get(0).getTitle());
-	 }
+	public void findByTitle() {
+		List<Activity> personActivities = personManager.findByTitle("Développeur application Hybride");
+		assertEquals("Développeur application Hybride", personActivities.get(0).getTitle());
+	}
 
 }

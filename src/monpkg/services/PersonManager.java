@@ -17,41 +17,79 @@ import javax.persistence.Query;
 import monpkg.entities.Activity;
 import monpkg.entities.Person;
 
+/**
+ * The Class PersonManager.
+ */
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
 public class PersonManager {
 
+	/** 
+	 * 
+	 */
+	@PersistenceContext(unitName = "myMySQLBase")
+	EntityManager em;
+
+	/**
+	 * 
+	 */
 	@PostConstruct()
 	public void debut() {
 		System.out.println("Starting " + this);
 	}
 
+	/**
+	 * 
+	 */
 	@PreDestroy
 	public void fin() {
 		System.out.println("Stopping " + this);
 	}
 
-	@PersistenceContext(unitName = "myMySQLBase")
-	EntityManager em;
-
-	public List<Person> findPersons() {
-		return em.createQuery("SELECT p FROM Person p", Person.class).getResultList();
-	}
-
+	/**
+	 * Find one person.
+	 *
+	 * @param person
+	 *            the person
+	 * @return the person
+	 */
 	public Person findOnePerson(Person person) {
 		return em.find(Person.class, person.getIdPerson());
 	}
 
+	/**
+	 * Find persons.
+	 *
+	 * @return the list of persons	
+	 */
+	public List<Person> findPersons() {
+		return em.createQuery("SELECT p FROM Person p", Person.class).getResultList();
+	}
+
+	/**
+	 * Save person.
+	 *
+	 * @param person
+	 *            the person
+	 */
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
-	public void savePerson(Person p) {
-		if (em.find(Person.class, p.getIdPerson()) == null) {
-			em.persist(p);
+	public void savePerson(Person person) {
+		if (em.find(Person.class, person.getIdPerson()) == null) {
+			em.persist(person);
 		} else {
-			em.merge(p);
+			em.merge(person);
 		}
 	}
 
-	public List<Activity> findActivtiesPerson(Person person) {
+	/**
+	 * Find activities of person.
+	 *
+	 * @param person
+	 *            the person
+	 * @return the list
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Activity> findActivitiesPerson(Person person) {
 		Query query = null;
 		if (person.getIdPerson() != null) {
 
@@ -66,6 +104,14 @@ public class PersonManager {
 		return null;
 	}
 
+	/**
+	 * Find by title.
+	 *
+	 * @param title
+	 *            the title
+	 * @return the list
+	 */
+	@SuppressWarnings("unchecked")
 	public List<Activity> findByTitle(String title) {
 		Query query = null;
 		try {

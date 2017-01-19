@@ -3,7 +3,6 @@ package monpkg.tests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import java.sql.SQLException;
 import java.util.Date;
 
 import javax.ejb.EJB;
@@ -18,27 +17,48 @@ import monpkg.entities.Person;
 import monpkg.services.ActivityManager;
 import monpkg.services.PersonManager;
 
+/**
+ * The Class TestActivityManager.
+ */
 public class TestActivityManager {
 
+	/** The activity manager. */
 	@EJB
 	ActivityManager activityManager;
 
+	/** The person manager. */
 	@EJB
 	PersonManager personManager;
 
+	/**
+	 * Instantiates a new test activity manager.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
 	public TestActivityManager() throws Exception {
 		EJBContainer.createEJBContainer().getContext().bind("inject", this);
 	}
 
+	/** The nature. */
 	Nature nature;
 
+	/**
+	 * Sets the up.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
 	@Before
 	public void setUp() throws Exception {
 
 	}
 
+	/**
+	 * Test save activity.
+	 */
 	// @Test
-	// public void testSaveActivity() throws SQLException {
+	// public void testSaveActivity() {
 	// Activity activity = new Activity();
 	// activity.setYear(new Date());
 	// activity.setNature(Nature.EXPERIENCES_PROFESSIONNELLES);
@@ -53,20 +73,29 @@ public class TestActivityManager {
 	// activityManager.saveActivity(activity);
 	// }
 
+	/**
+	 * Test find one activity.
+	 */
 	@Test
-	public void testFindOneActivity() throws SQLException {
+	public void testFindOneActivity() {
 		Activity findActivity = activityManager.findOneActivity("Développeur application Hybride");
 		assertEquals("Développeur application Hybride", findActivity.getTitle());
 	}
 
+	/**
+	 * Test find activity.
+	 */
 	@Test
-	public void testFindActivity() throws SQLException {
+	public void testFindActivity() {
 		assertNotNull(activityManager.findActivities());
-		assertEquals(3, activityManager.findActivities().size());
+		assertEquals(6, activityManager.findActivities().size());
 	}
 
+	/**
+	 * Test login.
+	 */
 	@Test
-	public void testLogin() throws Exception {
+	public void testLogin() {
 		Person person = new Person();
 		person.setIdPerson(1);
 		Person findPerson = personManager.findOnePerson(person);
