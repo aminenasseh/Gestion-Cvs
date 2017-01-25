@@ -119,7 +119,7 @@ public class PersonManager {
 	 * @return the list
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Activity> findByTitle(String title) {
+	public List<Activity> findActivityByTitle(String title) {
 		Query query = null;
 		try {
 			query = em.createQuery("SELECT a FROM Activity a WHERE a.title LIKE'%" + title + "%'");
