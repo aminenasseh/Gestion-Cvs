@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title><ui:insert name="title">My application</ui:insert></title>
+</h:head>
+<h:body>
+
+	<h:outputStylesheet library="css" name="style.css" />
+	<div id="page">
+		<div id="header">
+			<ui:insert name="header">
+				<span>My application</span>
+			</ui:insert>
+		</div>
+		<div id="menu">
+			<ui:insert name="menu">
+				<ui:include src="/template/menu.xhtml" />
+			</ui:insert>
+		</div>
+		<ui:debug />
+		<div id="content">
+			<ui:insert name="content">
+				<p>CONTENT</p>
+			</ui:insert>
+			<h:messages />
+		</div>
+		<div id="footer">
+			<ui:insert name="footer">
+				<span>(c) 2017 by NASSEH, RHAZI</span>
+			</ui:insert>
+		</div>
+	</div>
+</h:body>
+</html>

@@ -46,7 +46,11 @@ td, th {
 	size: small;
 	color: blue;
 	background-color: #c8bfbf;
-	margin-top: 20px;
+	clear: both;
+	position: relative;
+	z-index: 10;
+	height: 3em;
+	margin-top: -3em;
 }
 
 .alert {

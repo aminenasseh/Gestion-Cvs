@@ -2,6 +2,7 @@ package monpkg.services;
 
 import java.util.List;
 
+import javax.ejb.ApplicationException;
 import javax.ejb.Stateful;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
@@ -20,13 +21,14 @@ import monpkg.entities.Person;
  */
 @Stateful
 @TransactionManagement(TransactionManagementType.CONTAINER)
+@ApplicationException(rollback = true)
 public class ActivityManager {
 
 	/** 
 	 * 
 	 */
 	@PersistenceContext(unitName = "myMySQLBase")
-	EntityManager em;
+	private EntityManager em;
 
 	/** The auth person. */
 	private Person authPerson = new Person();
@@ -36,7 +38,6 @@ public class ActivityManager {
 	 *
 	 * @return a list of activities
 	 */
-	@SuppressWarnings("unchecked")
 	public List<Activity> findActivities() {
 		Query query = null;
 		try {
@@ -71,15 +72,17 @@ public class ActivityManager {
 	}
 
 	/**
-	 * Delete activity.
+	 * Save activity.
 	 *
-	 * @param title
-	 *            removes the activities given as a parameter title
+	 * @param a
+	 *            the a
 	 */
-	public void deleteOneActivity(String title) {
-		Activity activity = findOneActivity(title);
-		if (activity != null) {
-			em.remove(activity);
+	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+	public void saveActivity(Activity activity) {
+		if (em.find(Activity.class, activity.getIdActivity()) == null) {
+			em.persist(activity);
+		} else {
+			em.merge(activity);
 		}
 	}
 
@@ -101,17 +104,15 @@ public class ActivityManager {
 	}
 
 	/**
-	 * Save activity.
+	 * Delete activity.
 	 *
-	 * @param a
-	 *            the a
+	 * @param title
+	 *            removes the activities given as a parameter title
 	 */
-	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
-	public void saveActivity(Activity activity) {
-		if (em.find(Activity.class, activity.getIdActivity()) == null) {
-			em.persist(activity);
-		} else {
-			em.merge(activity);
+	public void deleteOneActivity(String title) {
+		Activity activity = findOneActivity(title);
+		if (activity != null) {
+			em.remove(activity);
 		}
 	}
 

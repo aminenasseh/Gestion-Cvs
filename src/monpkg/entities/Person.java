@@ -28,21 +28,21 @@ public class Person implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idPerson;
-	
+
 	private String name;
-	
+
 	private String firstName;
-	
+
 	private String email;
-	
+
 	private String webSite;
 
 	@Temporal(TemporalType.DATE)
 	private Date birthday;
-	
+
 	private String password;
 
-	@OneToMany(mappedBy = "person", cascade = { CascadeType.MERGE, CascadeType.REMOVE})
+	@OneToMany(mappedBy = "person", cascade = { CascadeType.MERGE, CascadeType.REMOVE })
 	@JoinTable(name = "person_activities")
 	private Set<Activity> activities = new HashSet<Activity>();
 
@@ -100,6 +100,14 @@ public class Person implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public Set<Activity> getActivities() {
+		return activities;
+	}
+
+	public void setActivities(Set<Activity> activities) {
+		this.activities = activities;
 	}
 
 }

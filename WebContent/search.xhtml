@@ -1,0 +1,43 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+</h:head>
+<h:body>
+	<h:outputStylesheet library="css" name="style.css" />
+	<ui:composition template="/template/mylayout.xhtml">
+		<ui:define name="content">
+			<p:layoutUnit id="content" position="center">
+				<h:form>
+					<p:panel header="Resultat de la recherche ">
+
+						<ui:repeat var="a" value="#{person.theActivities}">
+							<h:panelGrid columns="3" cellpadding="5">
+								<h:outputText value="Titre:" />
+								<h:outputText id="title" value="#{a.title}" />
+								<h:commandLink action="#{person.show(a.person)}"
+									value="Voir le CV" />
+							</h:panelGrid>
+						</ui:repeat>
+					</p:panel>
+				</h:form>
+			</p:layoutUnit>
+			<!-- 			<h:form> -->
+			<!-- 				<ui:repeat var="a" value="#{person.theActivities}"> -->
+			<!-- 					<h:panelGrid columns="3" cellpadding="5"> -->
+			<!-- 						<h:outputText value="Titre:" /> -->
+			<!-- 						<h:outputText id="title" value="#{a.title}" /> -->
+			<!-- 						<h:commandLink action="#{person.show(a.person)}" -->
+			<!-- 							value="Voir le CV" /> -->
+			<!-- 					</h:panelGrid> -->
+			<!-- 				</ui:repeat> -->
+			<!-- 			</h:form> -->
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

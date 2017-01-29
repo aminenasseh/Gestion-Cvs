@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -15,9 +14,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "activities")
+@Table(name = "activities", uniqueConstraints = {
+		@UniqueConstraint(name = "year_nature", columnNames = { "year", "nature" }) })
 public class Activity implements Serializable {
 
 	/**
@@ -31,11 +32,14 @@ public class Activity implements Serializable {
 
 	@Temporal(TemporalType.DATE)
 	private Date year;
-	
-    @Enumerated(EnumType.STRING)
-    @Column(columnDefinition = "ENUM('FORMATIONS', 'EXPERIENCES_PROFESSIONNELLES', 'COMPETENCES', 'LANGUES', 'CENTRES_DINTERETS')")
+
+	// @Column(columnDefinition = "ENUM('FORMATIONS',
+	// 'EXPERIENCES_PROFESSIONNELLES', 'COMPETENCES', 'LANGUES',
+	// 'CENTRES_DINTERETS')")
+
+	@Enumerated(EnumType.STRING)
 	private Nature nature;
-    
+
 	private String title;
 	private String description;
 	private String webAddress;

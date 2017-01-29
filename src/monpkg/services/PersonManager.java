@@ -63,7 +63,8 @@ public class PersonManager {
 	 * @return the list of persons
 	 */
 	public List<Person> findPersons() {
-		return em.createQuery("SELECT p FROM Person p", Person.class).getResultList();
+		Query query = em.createQuery("SELECT p FROM Person p");
+		return query.getResultList();
 	}
 
 	/**
@@ -89,13 +90,24 @@ public class PersonManager {
 	}
 
 	/**
+	 * Find activities.
+	 *
+	 * @return the list of persons
+	 */
+	public List<Activity> findActivities() {
+		Query query = em.createQuery("SELECT a FROM Activity a");
+		return query.getResultList();
+		// return em.createQuery("SELECT p FROM Person p",
+		// Person.class).getResultList();
+	}
+
+	/**
 	 * Find activities of person.
 	 *
 	 * @param person
 	 *            the person
 	 * @return the list
 	 */
-	@SuppressWarnings("unchecked")
 	public List<Activity> findActivitiesPerson(Person person) {
 		Query query = null;
 		if (person.getIdPerson() != null) {
@@ -118,7 +130,6 @@ public class PersonManager {
 	 *            the title
 	 * @return the list
 	 */
-	@SuppressWarnings("unchecked")
 	public List<Activity> findActivityByTitle(String title) {
 		Query query = null;
 		try {
@@ -127,7 +138,7 @@ public class PersonManager {
 			return null;
 		}
 		if (query != null) {
-			return (List<Activity>) query.getResultList();
+			return query.getResultList();
 		}
 		return null;
 	}

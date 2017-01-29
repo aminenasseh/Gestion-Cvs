@@ -3,17 +3,42 @@
    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
 <h:head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Accueil page</title>
 </h:head>
 <h:body>
 	<h:outputStylesheet library="css" name="style.css" />
-	<f:view>
-		<h1>
-			<h:outputText value="Accueil, world" />
-		</h1>
-	</f:view>
+	<ui:composition template="/template/mylayout.xhtml">
+		<ui:define name="content">
+		Persons:
+			<p:layoutUnit id="content" position="center">
+				<h:form>
+					<p:panel header="Recherche de CVs ">
+						<h3>Filtrer par :</h3>
+						<h:panelGrid columns="4" cellpadding="5">
+							<h:outputText value="Titre d'activité:" />
+							<p:inputText id="title" value="#{person.title}" required="true"
+								requiredMessage="Recherche impossible : Champ vide" />
+							<h:commandButton action="#{person.showActivity}" value="Chercher" />
+							<p:message for="title" />
+						</h:panelGrid>
+						<ui:repeat var="p" value="#{person.activities}">
+							<ul>
+								<li><h:commandLink action="#{person.showActivity(p.title)}"
+										value="#{p.title}" /></li>
+								<br />
+							</ul>
+						</ui:repeat>
+
+					</p:panel>
+				</h:form>
+			</p:layoutUnit>
+		</ui:define>
+	</ui:composition>
 </h:body>
+
 </html>
