@@ -27,7 +27,7 @@ public class ActivityController {
 
 	}
 
-	public String accueilAuthentificatedPerson() {
+	public String authentificatedPerson() {
 		if (am.login(authPerson.getEmail(), authPerson.getPassword()) != null) {
 			authPerson = am.getAuthPerson();
 			person.setName(authPerson.getName());

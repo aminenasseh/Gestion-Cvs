@@ -14,27 +14,16 @@
 	<h:outputStylesheet library="css" name="style.css" />
 	<ui:composition template="/template/mylayout.xhtml">
 		<ui:define name="content">
-		Persons:
+		Liste des titres d'activités des personnes:
 			<p:layoutUnit id="content" position="center">
 				<h:form>
-					<p:panel header="Recherche de CVs ">
-						<h3>Filtrer par :</h3>
-						<h:panelGrid columns="4" cellpadding="5">
-							<h:outputText value="Titre d'activité:" />
-							<p:inputText id="title" value="#{person.title}" required="true"
-								requiredMessage="Recherche impossible : Champ vide" />
-							<h:commandButton action="#{person.showActivity}" value="Chercher" />
-							<p:message for="title" />
-						</h:panelGrid>
-						<ui:repeat var="p" value="#{person.activities}">
-							<ul>
-								<li><h:commandLink action="#{person.showActivity(p.title)}"
-										value="#{p.title}" /></li>
-								<br />
-							</ul>
-						</ui:repeat>
+					<ui:repeat var="p" value="#{person.activities}">
+						<ul>
+							<li><h:commandLink action="#{person.showActivity(p.title)}"
+									value="#{p.title}" /><br /></li>
 
-					</p:panel>
+						</ul>
+					</ui:repeat>
 				</h:form>
 			</p:layoutUnit>
 		</ui:define>

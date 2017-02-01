@@ -2,6 +2,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <h:head>
@@ -10,39 +11,41 @@
 <ui:composition template="/template/mylayout.xhtml">
 	<ui:define name="content">
 		<h:form id="form">
-			<h:panelGrid columns="2" style="width:100%">
-				<h:panelGrid columns="2" cellpadding="5">
-					<h:outputText value="Nom:" />
-					<h:outputText value="#{person.thePerson.name}" />
-
-					<h:outputText value="Prenom:" />
-					<h:outputText value="#{person.thePerson.firstName}" />
-
-					<h:outputText value="Date de naissance:" />
-					<h:outputText value="#{person.thePerson.birthday}" />
-
-					<h:outputText value="Site Web:" />
-					<h:outputText value="#{person.thePerson.webSite}" />
-				</h:panelGrid>
-				<f:facet name="header"> Acitivité(s) </f:facet>
-				<ui:repeat var="a" value="#{person.activities}">
+			<p:layoutUnit id="content" position="center">
+				<h:panelGrid columns="2" style="width:100%">
 					<h:panelGrid columns="2" cellpadding="5">
-						<h:outputText value="Nature:" />
-						<h:outputText value="#{a.nature}" />
+						<h:outputText value="Nom:" />
+						<h:outputText value="#{person.thePerson.name}" />
 
-						<h:outputText value="Titre:" />
-						<h:outputText value="#{a.title}" />
+						<h:outputText value="Prenom:" />
+						<h:outputText value="#{person.thePerson.firstName}" />
 
-						<h:outputText value="Annee:" />
-						<h:outputText value="#{a.year}" />
+						<h:outputText value="Date de naissance:" />
+						<h:outputText value="#{person.thePerson.birthday}" />
 
-						<h:outputText value="Description:" />
-						<h:outputText value="#{a.description}" />
-
+						<h:outputText value="Site Web:" />
+						<h:outputText value="#{person.thePerson.webSite}" />
 					</h:panelGrid>
-				</ui:repeat>
-			</h:panelGrid>
-			<hr />
+					<f:facet name="header"> Acitivité(s) </f:facet>
+					<ui:repeat var="a" value="#{person.activities}">
+						<h:panelGrid columns="2" cellpadding="5">
+							<h:outputText value="Nature:" />
+							<h:outputText value="#{a.nature}" />
+
+							<h:outputText value="Titre:" />
+							<h:outputText value="#{a.title}" />
+
+							<h:outputText value="Annee:" />
+							<h:outputText value="#{a.year}" />
+
+							<h:outputText value="Description:" />
+							<h:outputText value="#{a.description}" />
+
+						</h:panelGrid>
+					</ui:repeat>
+				</h:panelGrid>
+				<hr />
+			</p:layoutUnit>
 		</h:form>
 	</ui:define>
 </ui:composition>
