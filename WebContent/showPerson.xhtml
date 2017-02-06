@@ -13,53 +13,57 @@
 
 		<p:layoutUnit id="content" position="center">
 
+			<p:tabView>
+				<p:tab title="Informations detaillées">
+					<h:form id="form">
 
-			<h:form id="form">
-				<p:panel header="Informations detaillées">
-					<h:panelGrid columns="2" style="width:100%">
-						<!-- 						<p:commandLink id="actLink" -->
-						<!-- 							value="#{person.thePerson.name} #{person.thePerson.firstName}" /> -->
-						<p:outputPanel>
-							<h:panelGrid columns="2" cellpadding="5">
-								<h:outputText value="Nom:" />
-								<h:outputText value="#{person.thePerson.name}" />
+						<h:panelGrid columns="2" style="width:100%">
+							<!-- 						<p:commandLink id="actLink" -->
+							<!-- 							value="#{person.thePerson.name} #{person.thePerson.firstName}" /> -->
+							<p:outputPanel>
+								<h:panelGrid columns="2" cellpadding="5">
+									<h:outputText value="Nom:" />
+									<h:outputText value="#{person.thePerson.name}" />
 
-								<h:outputText value="Prenom:" />
-								<h:outputText value="#{person.thePerson.firstName}" />
+									<h:outputText value="Prenom:" />
+									<h:outputText value="#{person.thePerson.firstName}" />
 
-								<h:outputText value="Date de naissance:" />
-								<h:outputText value="#{person.thePerson.birthday}" />
+									<h:outputText value="Date de naissance:" />
+									<h:outputText value="#{person.thePerson.birthday}" />
 
-								<h:outputText value="Site Web:" />
-								<h:outputText value="#{person.thePerson.webSite}" />
-							</h:panelGrid>
-						</p:outputPanel>
-					</h:panelGrid>
-					<hr />
-				</p:panel>
-				<p:panel header="Activitée detaillées">
-					<h:panelGrid columns="2" style="width:100%">
-						<ui:repeat var="a" value="#{person.activitiesPerson}">
-							<!-- 							<c:if test="${a.person.idPerson == person.thePerson.idPerson}"> -->
-							<h:panelGrid columns="2" cellpadding="5">
-								<h:outputText value="Nature:" />
-								<h:outputText value="#{a.nature}" />
+									<h:outputText value="Site Web:" />
+									<h:outputText value="#{person.thePerson.webSite}" />
+								</h:panelGrid>
+							</p:outputPanel>
+						</h:panelGrid>
+						<hr />
+						<p:tabView>
+							<p:tab title="Activitée detaillées :">
+								<h:panelGrid columns="2" style="width:100%">
+									<ui:repeat var="a" value="#{person.activitiesPerson}">
+										<!-- 							<c:if test="${a.person.idPerson == person.thePerson.idPerson}"> -->
+										<h:panelGrid columns="2" cellpadding="5">
+											<h:outputText value="Nature:" />
+											<h:outputText value="#{a.nature}" />
 
-								<h:outputText value="Titre:" />
-								<h:outputText value="#{a.title}" />
+											<h:outputText value="Titre:" />
+											<h:outputText value="#{a.title}" />
 
-								<h:outputText value="Annee:" />
-								<h:outputText value="#{a.year}" />
+											<h:outputText value="Annee:" />
+											<h:outputText value="#{a.year}" />
 
-								<h:outputText value="Description:" />
-								<h:outputText value="#{a.description}" />
+											<h:outputText value="Description:" />
+											<h:outputText value="#{a.description}" />
 
-							</h:panelGrid>
-							<!-- 							</c:if> -->
-						</ui:repeat>
-					</h:panelGrid>
-				</p:panel>
-			</h:form>
+										</h:panelGrid>
+										<!-- 							</c:if> -->
+									</ui:repeat>
+								</h:panelGrid>
+							</p:tab>
+						</p:tabView>
+					</h:form>
+				</p:tab>
+			</p:tabView>
 
 			<!-- 				<h:panelGrid columns="2" style="width:100%"> -->
 			<!-- 					<h:panelGrid columns="2" cellpadding="5"> -->

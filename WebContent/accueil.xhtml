@@ -15,21 +15,22 @@
 	<ui:composition template="/template/mylayout.xhtml">
 		<ui:define name="content">
 			<p:layoutUnit id="content" position="center">
-				<f:facet name="header">
-            		Liste des personnes
-            	</f:facet>
-				<h:form>
-					<ui:repeat var="p" value="#{person.persons}">
-						<ul>
-							<li>
-								<p>
-									<h:commandLink action="#{person.show(p)}"
-										value="#{p.name} #{p.firstName}" />
-								</p>
-							</li>
-						</ul>
-					</ui:repeat>
-				</h:form>
+				<p:tabView>
+					<p:tab title="La liste des Personnes">
+						<h:form>
+							<ui:repeat var="p" value="#{person.persons}">
+								<ul>
+									<li>
+										<p>
+											<h:commandLink action="#{person.show(p)}"
+												value="#{p.name} #{p.firstName}" />
+										</p>
+									</li>
+								</ul>
+							</ui:repeat>
+						</h:form>
+					</p:tab>
+				</p:tabView>
 			</p:layoutUnit>
 		</ui:define>
 	</ui:composition>

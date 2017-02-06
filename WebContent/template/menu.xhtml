@@ -11,21 +11,22 @@
 <p:layoutUnit id="menu" position="east" resizable="true" size="250"
 	minSize="40" maxSize="300">
 
-	<f:facet name="header" style="width:225px;height:490px">
-            	Menu
-        </f:facet>
-	<h:form>
-		<ul>
-			<li><p:commandLink action="navigation.accueil" value="Accueil"
-					icon="ui-icon-home" /></li>
+	<p:tabView>
+		<p:tab title="Menu">
+			<h:form>
+				<ul>
+					<li><p:commandLink action="navigation.accueil" value="Accueil"
+							icon="ui-icon-home" /></li>
 
-			<li><p:commandLink action="navigation.showPersons"
-					value="Lister les CVs" icon="ui-icon-arrowreturnthink-1-e" /></li>
+					<li><p:commandLink action="navigation.showPersons"
+							value="Lister les CVs" icon="ui-icon-arrowreturnthink-1-e" /></li>
 
-			<li><p:commandLink action="navigation.editPerson"
-					value="Créer un compte" icon="ui-icon-person" /></li>
-		</ul>
-	</h:form>
+					<li><p:commandLink action="navigation.editPerson"
+							value="Créer un compte" icon="ui-icon-person" /></li>
+				</ul>
+			</h:form>
+		</p:tab>
+	</p:tabView>
 
 	<p:separator />
 
@@ -34,6 +35,7 @@
 		<c:set var="u" value="#{authentificated.authPerson}" />
 		<c:choose>
 			<c:when test="${u.idPerson eq 00}">
+				<!-- 				<h:panelGrid columns="5" cellpadding="2" styleClass="formConnexion"> -->
 
 				<p:outputLabel>E-mail</p:outputLabel>
 				<p:inputText id="email" value="#{u.email}"></p:inputText>
@@ -43,14 +45,15 @@
 				<p:commandButton action="#{authentificated.authentificatedPerson()}"
 					value="Connexion" icon="ui-icon-check" validateClient="true"
 					update="growl" />
-
+				<!-- 				</h:panelGrid> -->
 			</c:when>
 			<c:otherwise>
-
-				<p:commandButton action="#{navigation.accueilAuth}"
-					value="Mon compte" icon="ui-icon-person" styleClass="compte" />
-				<p:commandButton action="#{authentificated.logoutPerson}"
-					value="Deconnexion" icon="ui-icon-circle-close" styleClass="dec" />
+				<h:panelGrid columns="2" cellpadding="5">
+					<p:commandButton action="#{navigation.accueilAuth}"
+						value="Mon compte" icon="ui-icon-person" styleClass="compte" />
+					<p:commandButton action="#{authentificated.logoutPerson}"
+						value="Deconnexion" icon="ui-icon-circle-close" styleClass="dec" />
+				</h:panelGrid>
 			</c:otherwise>
 		</c:choose>
 	</h:form>
