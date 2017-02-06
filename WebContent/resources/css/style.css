@@ -2,6 +2,14 @@ h1 {
 	border-bottom: solid 1px blue;
 }
 
+body {
+	background-color: lightblue;
+}
+
+/* form { */
+/* 	background-color:  #8cabb5; */
+/* } */
+
 table {
 	border-collapse: collapse;
 	border: 1px solid black;

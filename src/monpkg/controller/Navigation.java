@@ -5,7 +5,7 @@ import javax.faces.bean.ManagedBean;
 @ManagedBean
 public class Navigation {
 
-	public String showPerson() {
+	public String show() {
 		return "showPerson";
 	}
 
@@ -19,6 +19,10 @@ public class Navigation {
 
 	public String accueil() {
 		return "accueil?faces-redirect=true";
+	}
+	
+	public String accueilAuth() {
+		return "accueilAuthPerson?faces-redirect=true";
 	}
 
 }

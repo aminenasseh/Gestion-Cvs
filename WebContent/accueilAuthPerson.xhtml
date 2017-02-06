@@ -1,0 +1,93 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+
+<h:head>
+</h:head>
+<h:body>
+	<h:outputStylesheet library="css" name="style.css" />
+	<ui:composition template="/template/mylayout.xhtml">
+		<ui:define name="content">
+			<p:layoutUnit id="content" position="center">
+
+				<c:set var="u" value="#{authentificated.authPerson}" />
+				<c:set var="validated" value="#{authentificated.validatePerson}" />
+
+				<c:choose>
+					<c:when test="${u.idPerson eq 00}">
+					Cette page ne vous est pas autorisée!
+					Veuillez vous connecter SVP :)
+					</c:when>
+					<c:otherwise>
+
+						<p:growl id="msgs" showDetail="true" />
+						<p:tabView>
+							<p:tab title="Modifier mes informations">
+								<h:form>
+									<p:panel>
+										<h:panelGrid columns="3" cellpadding="5">
+											<h:outputLabel for="name" value="Nom:" />
+											<p:inputText id="name" value="#{validated.name}" label="Nom" />
+											<p:message for="name" />
+											<h:outputLabel for="firstName" value="Prénom:" />
+											<p:inputText id="firstName" value="#{validated.firstName}"
+												label="Prénom" />
+											<p:message for="firstName" />
+											<p:outputLabel for="birthday" value="Date de naissance:" />
+											<p:calendar id="birthday" value="#{validated.birthday}"
+												locale="fr" navigator="true" pattern="dd-MM-yyyy" />
+											<p:message for="birthday" />
+											<h:outputLabel for="email" value="Email:" />
+											<p:inputText id="email" value="#{validated.email}"
+												label="Email" />
+											<p:message for="email" />
+											<h:outputLabel for="web" value="Site web:" />
+											<p:inputText id="web" value="#{validated.webAddress}"
+												label="Site web" />
+											<p:message for="web" />
+											<h:outputLabel for="password" value="Mot de passe:" />
+											<p:password id="password" value="#{validated.password}"
+												label="Mot de passe" />
+											<p:message for="password" />
+										</h:panelGrid>
+
+										<p:commandButton
+											actionListener="#{authentificated.updateAuthPerson}"
+											value="Enregister" ajax="true" icon="ui-icon-check"
+											validateClient="true" update="msgs" />
+
+									</p:panel>
+									<p:dialog modal="true" resizable="false" header="Values"
+										widgetVar="dlg" showEffect="fold">
+										<p:panelGrid id="display" columns="2"
+											columnClasses="label,value">
+											<h:outputText value="Date de naissance:" />
+											<h:outputText value="#{validated.birthday}">
+												<f:convertDateTime pattern="dd/MM/yyyy" />
+											</h:outputText>
+
+										</p:panelGrid>
+									</p:dialog>
+								</h:form>
+							</p:tab>
+							<!-- 							<p:tab title="Modifier mes activités"> -->
+							<!-- 								<ui:include src="editActivities.xhtml" /> -->
+							<!-- 							</p:tab> -->
+							<!-- 							<p:tab title="Ajouter une activité"> -->
+							<!-- 								<ui:include src="editActivity.xhtml" /> -->
+							<!-- 							</p:tab> -->
+
+						</p:tabView>
+					</c:otherwise>
+				</c:choose>
+
+			</p:layoutUnit>
+		</ui:define>
+	</ui:composition>
+
+</h:body>
+</html>

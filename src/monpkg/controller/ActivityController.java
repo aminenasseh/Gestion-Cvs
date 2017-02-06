@@ -10,6 +10,8 @@ import javax.faces.context.FacesContext;
 
 import monpkg.entities.Person;
 import monpkg.services.ActivityManager;
+import monpkg.validator.ActivityValidator;
+import monpkg.validator.PersonValidator;
 
 @ManagedBean(name = "authentificated", eager = false)
 @SessionScoped
@@ -20,21 +22,38 @@ public class ActivityController {
 	ActivityManager am;
 
 	Person authPerson = new Person();
-	Person person = new Person();
+	PersonValidator validatePerson = new PersonValidator();
+	ActivityValidator validateActivity = new ActivityValidator();
 
 	@PostConstruct
 	public void init() {
+		System.out.println("Create " + this);
+		validatePerson.setName(null);
+		validatePerson.setFirstName(null);
+		validatePerson.setBirthday(null);
+		validatePerson.setEmail(null);
+		validatePerson.setWebAddress(null);
+		validatePerson.setPassword(null);
 
+		// id for anonymous user
+		authPerson.setIdPerson(00);
+
+		validateActivity.setNature(null);
+		validateActivity.setTitle(null);
+		validateActivity.setYear(null);
+		validateActivity.setDescription(null);
 	}
+	
+	/* ********************************************************************************************************** */
 
 	public String authentificatedPerson() {
 		if (am.login(authPerson.getEmail(), authPerson.getPassword()) != null) {
 			authPerson = am.getAuthPerson();
-			person.setName(authPerson.getName());
-			person.setFirstName(authPerson.getFirstName());
-			person.setBirthday(authPerson.getBirthday());
-			person.setEmail(authPerson.getEmail());
-			person.setWebSite(authPerson.getWebSite());
+			validatePerson.setName(authPerson.getName());
+			validatePerson.setFirstName(authPerson.getFirstName());
+			validatePerson.setBirthday(authPerson.getBirthday());
+			validatePerson.setEmail(authPerson.getEmail());
+			validatePerson.setWebAddress(authPerson.getWebSite());
 
 			return "accueilAuthPerson?faces-redirect=true";
 		}
@@ -42,6 +61,64 @@ public class ActivityController {
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 
 		return "accueil?faces-redirect=true";
+	}
+	
+	/* ********************************************************************************************************** */
+
+	public String logoutPerson() {
+		System.out.println("test");
+		authPerson = am.logout();
+		return "accueil?faces-redirect=true";
+	}
+	
+	/* ********************************************************************************************************** */
+	
+	public String updateAuthPerson() {
+		authPerson.setName(validatePerson.getName());
+		authPerson.setFirstName(validatePerson.getFirstName());
+		authPerson.setBirthday(validatePerson.getBirthday());
+		authPerson.setWebSite(validatePerson.getWebAddress());
+		authPerson.setEmail(validatePerson.getEmail());
+		authPerson.setPassword(validatePerson.getPassword());
+		am.updateActivity(authPerson);
+		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Mise à jour effectuée", "");
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+
+		return "accueilAuthPerson?faces-redirect=true";
+	}
+	
+	/* ********************************************************************************************************** */
+	
+	/* ********************************************************************************************************** */
+
+	// Update person
+	// New Activity
+
+	
+	/* ****************************************** GETTERS AND SETTERS ****************************************** */
+	
+	public Person getAuthPerson() {
+		return authPerson;
+	}
+
+	public void setAuthPerson(Person authPerson) {
+		this.authPerson = authPerson;
+	}
+
+	public PersonValidator getValidatePerson() {
+		return validatePerson;
+	}
+
+	public void setValidatePerson(PersonValidator validatePerson) {
+		this.validatePerson = validatePerson;
+	}
+
+	public ActivityValidator getValidateActivity() {
+		return validateActivity;
+	}
+
+	public void setValidateActivity(ActivityValidator validateActivity) {
+		this.validateActivity = validateActivity;
 	}
 
 }

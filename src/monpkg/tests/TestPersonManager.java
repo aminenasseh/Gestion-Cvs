@@ -76,11 +76,11 @@ public class TestPersonManager {
 	 * Test find one person.
 	 */
 	@Test
-	public void testFindOnePerson() {
+	public void testFindOne() {
 		Person person = new Person();
 		Person findPerson = new Person();
 		person.setIdPerson(1);
-		findPerson = personManager.findOnePerson(person);
+		findPerson = personManager.findOne(person);
 		assertEquals("NASSEH", findPerson.getName());
 	}
 
@@ -100,7 +100,7 @@ public class TestPersonManager {
 	// public void testUpdatePerson() {
 	// Person person = new Person();
 	// person.setIdPerson(1);
-	// person = personManager.findOnePerson(person);
+	// person = personManager.findOne(person);
 	// person.setEmail("amine.nasseh@gmail.com");
 	// personManager.savePerson(person);
 	// Person personUp = personManager.findOnePerson(person);
@@ -115,7 +115,7 @@ public class TestPersonManager {
 	// public void testDeletePerson() {
 	// Person person = new Person();
 	// person.setIdPerson(1);
-	// Person findPerson = personManager.findOnePerson(person);
+	// Person findPerson = personManager.findOne(person);
 	// personManager.deletePerson(findPerson);
 	//
 	// }
@@ -134,11 +134,10 @@ public class TestPersonManager {
 	/**
 	 * Find by title.
 	 */
-	 @Test
-	 public void findActivityByTitle() {
-	 List<Activity> personActivities = personManager.findActivityByTitle("Développeur application Hybride");
-	 assertEquals("Développeur application Hybride",
-	 personActivities.get(0).getTitle());
-	 }
+	@Test
+	public void findActivityByTitle() {
+		List<Activity> personActivities = personManager.findActivityByTitle("Développeur application Hybride");
+		assertEquals("Développeur application Hybride", personActivities.get(0).getTitle());
+	}
 
 }

@@ -148,6 +148,21 @@ public class ActivityManager {
 	}
 
 	/**
+	 * 
+	 * @return
+	 */
+	public Person logout() {
+		authPerson.setIdPerson(0000);
+		authPerson.setName(null);
+		authPerson.setFirstName(null);
+		authPerson.setEmail(null);
+		authPerson.setBirthday(null);
+		authPerson.setPassword(null);
+		authPerson.setWebSite(null);
+		return authPerson;
+	}
+
+	/**
 	 * Gets the auth person.
 	 *
 	 * @return the auth person

@@ -94,7 +94,7 @@ public class PersonController {
 	 * find one person
 	 */
 	public String show(Person person) {
-		thePerson = pm.findOnePerson(person);
+		thePerson = pm.findOne(person);
 		return "showPerson?faces-redirect=true";
 	}
 

@@ -53,7 +53,7 @@ public class PersonManager {
 	 *            the person
 	 * @return the person
 	 */
-	public Person findOnePerson(Person person) {
+	public Person findOne(Person person) {
 		return em.find(Person.class, person.getIdPerson());
 	}
 

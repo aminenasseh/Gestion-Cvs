@@ -7,38 +7,15 @@
 
 <p:layoutUnit id="header" position="north" resizable="true" size="80"
 	minSize="40" maxSize="100">
-	<h:form method="POST">
-		<p:growl id="growl" showDetail="true" sticky="true" />
+	<h:form>
 
-		<c:choose>
-
-			<c:when test="${u.idPerson eq 0000}">
-				<h:panelGrid columns="5" cellpadding="2" styleClass="formConnexion">
-
-					<p:outputLabel>E-mail</p:outputLabel>
-					<p:inputText id="email" value="#{u.email}"></p:inputText>
-					<p:outputLabel>Mot de passe</p:outputLabel>
-					<p:password id="password" value="#{u.password}"></p:password>
-					<p:commandButton
-						action="#{authentificated.authentificatedPerson()}"
-						value="Connexion" icon="ui-icon-check" validateClient="true"
-						update="growl" />
-				</h:panelGrid>
-
-			</c:when>
-
-			<c:otherwise>
-
-				<h:panelGrid columns="2" cellpadding="5">
-
-					<p:commandButton action="#{navigation.accueil}" value="Mon compte"
-						icon="ui-icon-person" styleClass="compte" />
-				</h:panelGrid>
-
-			</c:otherwise>
-
-		</c:choose>
-
+		<h:panelGrid columns="2" >
+			<p:inputText id="title" value="#{person.title}"
+				placeholder="Search Title" required="true" style="margin-right:10px"
+				requiredMessage="Recherche impossible : Champ vide" />
+			<h:commandButton action="#{person.showActivity}" value="Chercher"
+				icon="ui-icon-search" />
+		</h:panelGrid>
 
 	</h:form>
 

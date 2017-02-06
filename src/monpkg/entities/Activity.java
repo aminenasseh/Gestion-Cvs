@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -15,6 +16,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "activities", uniqueConstraints = {
@@ -33,15 +36,20 @@ public class Activity implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date year;
 
-	// @Column(columnDefinition = "ENUM('FORMATIONS',
-	// 'EXPERIENCES_PROFESSIONNELLES', 'COMPETENCES', 'LANGUES',
-	// 'CENTRES_DINTERETS')")
-
 	@Enumerated(EnumType.STRING)
 	private Nature nature;
 
+	@Column
+	@NotNull
+	@Size(min = 5, max = 200)
 	private String title;
+	@Column
+	@NotNull
+	@Size(min = 5, max = 200)
 	private String description;
+	@Column
+	@NotNull
+	@Size(min = 5, max = 200)
 	private String webAddress;
 
 	@ManyToOne(cascade = { CascadeType.MERGE })

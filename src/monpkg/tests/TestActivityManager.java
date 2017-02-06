@@ -68,7 +68,7 @@ public class TestActivityManager {
 		Person person = new Person();
 		Person findPerson = new Person();
 		person.setIdPerson(1);
-		findPerson = personManager.findOnePerson(person);
+		findPerson = personManager.findOne(person);
 		activity.setPerson(findPerson);
 		activityManager.saveActivity(activity);
 	}
@@ -109,7 +109,7 @@ public class TestActivityManager {
 	public void testLogin() {
 		Person person = new Person();
 		person.setIdPerson(1);
-		Person findPerson = personManager.findOnePerson(person);
+		Person findPerson = personManager.findOne(person);
 		assertNotNull(findPerson);
 		Person authPerson = activityManager.login(findPerson.getEmail(), findPerson.getPassword());
 		assertNotNull(authPerson);

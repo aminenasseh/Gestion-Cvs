@@ -14,14 +14,19 @@
 	<h:outputStylesheet library="css" name="style.css" />
 	<ui:composition template="/template/mylayout.xhtml">
 		<ui:define name="content">
-		Liste des titres d'activités des personnes:
 			<p:layoutUnit id="content" position="center">
+				<f:facet name="header">
+            		Liste des personnes
+            	</f:facet>
 				<h:form>
-					<ui:repeat var="p" value="#{person.activities}">
+					<ui:repeat var="p" value="#{person.persons}">
 						<ul>
-							<li><h:commandLink action="#{person.showActivity(p.title)}"
-									value="#{p.title}" /><br /></li>
-
+							<li>
+								<p>
+									<h:commandLink action="#{person.show(p)}"
+										value="#{p.name} #{p.firstName}" />
+								</p>
+							</li>
 						</ul>
 					</ui:repeat>
 				</h:form>
