@@ -3,13 +3,18 @@ package monpkg.validator;
 import java.util.Date;
 
 import javax.faces.bean.ManagedBean;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import monpkg.entities.Nature;
 
 @ManagedBean
 public class ActivityValidator {
 
-	private String nature;
+	@Enumerated(EnumType.STRING)
+	private Nature nature;
 
 	@Size(min = 5, max = 100, message = "Titre d'une activite: min 5 car, max 50 car")
 	private String title;
@@ -20,6 +25,17 @@ public class ActivityValidator {
 	@Size(min = 5, max = 500, message = "Description d'une activite: min 5 car, max 50 car")
 	private String description;
 
+	@Size(min = 5, max = 200, message = "L'adresse web d'une activite: min 5 car, max 50 car")
+	private String webAddress;
+
+	public String getWebAddress() {
+		return webAddress;
+	}
+
+	public void setWebAddress(String webAddress) {
+		this.webAddress = webAddress;
+	}
+
 	public Date getYear() {
 		return year;
 	}
@@ -28,11 +44,11 @@ public class ActivityValidator {
 		this.year = year;
 	}
 
-	public String getNature() {
+	public Nature getNature() {
 		return nature;
 	}
 
-	public void setNature(String nature) {
+	public void setNature(Nature nature) {
 		this.nature = nature;
 	}
 

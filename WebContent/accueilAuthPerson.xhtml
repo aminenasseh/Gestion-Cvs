@@ -74,13 +74,19 @@
 									</p:dialog>
 								</h:form>
 							</p:tab>
+
+
 							<!-- 							<p:tab title="Modifier mes activités"> -->
 							<!-- 								<ui:include src="editActivities.xhtml" /> -->
 							<!-- 							</p:tab> -->
 							<!-- 							<p:tab title="Ajouter une activité"> -->
 							<!-- 								<ui:include src="editActivity.xhtml" /> -->
 							<!-- 							</p:tab> -->
-
+						</p:tabView>
+						<p:tabView>
+							<p:tab title="Modifier mes activités">
+								<ui:include src="editActivity.xhtml" />
+							</p:tab>
 						</p:tabView>
 					</c:otherwise>
 				</c:choose>

@@ -8,13 +8,13 @@
 <p:layoutUnit id="header" position="north" resizable="true" size="80"
 	minSize="40" maxSize="100">
 	<h:form>
-
-		<h:panelGrid columns="2" >
+		<h:panelGrid columns="3">
 			<p:inputText id="title" value="#{person.title}"
 				placeholder="Search Title" required="true" style="margin-right:10px"
 				requiredMessage="Recherche impossible : Champ vide" />
 			<h:commandButton action="#{person.showActivity}" value="Chercher"
 				icon="ui-icon-search" />
+
 		</h:panelGrid>
 
 	</h:form>

@@ -8,6 +8,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+import monpkg.entities.Activity;
 import monpkg.entities.Person;
 import monpkg.services.ActivityManager;
 import monpkg.validator.ActivityValidator;
@@ -22,6 +23,7 @@ public class ActivityController {
 	ActivityManager am;
 
 	Person authPerson = new Person();
+	Activity authPersonActivity = new Activity();
 	PersonValidator validatePerson = new PersonValidator();
 	ActivityValidator validateActivity = new ActivityValidator();
 
@@ -38,13 +40,17 @@ public class ActivityController {
 		// id for anonymous user
 		authPerson.setIdPerson(00);
 
+		validateActivity.setDescription(null);
 		validateActivity.setNature(null);
+		validateActivity.setWebAddress(null);
 		validateActivity.setTitle(null);
 		validateActivity.setYear(null);
-		validateActivity.setDescription(null);
 	}
-	
-	/* ********************************************************************************************************** */
+
+	/*
+	 * *************************************************************************
+	 * *********************************
+	 */
 
 	public String authentificatedPerson() {
 		if (am.login(authPerson.getEmail(), authPerson.getPassword()) != null) {
@@ -62,17 +68,23 @@ public class ActivityController {
 
 		return "accueil?faces-redirect=true";
 	}
-	
-	/* ********************************************************************************************************** */
+
+	/*
+	 * *************************************************************************
+	 * *********************************
+	 */
 
 	public String logoutPerson() {
 		System.out.println("test");
 		authPerson = am.logout();
 		return "accueil?faces-redirect=true";
 	}
-	
-	/* ********************************************************************************************************** */
-	
+
+	/*
+	 * *************************************************************************
+	 * *********************************
+	 */
+
 	public String updateAuthPerson() {
 		authPerson.setName(validatePerson.getName());
 		authPerson.setFirstName(validatePerson.getFirstName());
@@ -86,17 +98,25 @@ public class ActivityController {
 
 		return "accueilAuthPerson?faces-redirect=true";
 	}
-	
-	/* ********************************************************************************************************** */
-	
-	/* ********************************************************************************************************** */
+
+	/*
+	 * *************************************************************************
+	 * *********************************
+	 */
+
+	/*
+	 * *************************************************************************
+	 * *********************************
+	 */
 
 	// Update person
 	// New Activity
 
-	
-	/* ****************************************** GETTERS AND SETTERS ****************************************** */
-	
+	/*
+	 * ****************************************** GETTERS AND SETTERS
+	 * ******************************************
+	 */
+
 	public Person getAuthPerson() {
 		return authPerson;
 	}

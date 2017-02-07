@@ -26,6 +26,26 @@
 				</ul>
 			</h:form>
 		</p:tab>
+		<p:tab title="Compte">
+			<c:set var="u" value="#{authentificated.authPerson}" />
+			<c:set var="validated" value="#{authentificated.validatePerson}" />
+			<c:choose>
+				<c:when test="${u.idPerson ne 00}">
+					<ul>
+						<li><h:outputLabel for="name" value="Nom:" /></li>
+						<li><h:outputLabel for="firstName" value="Prénom:" /></li>
+						<li><h:outputLabel for="email" value="Email:" /></li>
+					</ul>
+					<p:commandButton action="#{authentificated.logoutPerson}"
+						value="Deconnexion" icon="ui-icon-circle-close" styleClass="dec" />
+				</c:when>
+
+			</c:choose>
+			<c:otherwise>
+
+			</c:otherwise>
+
+		</p:tab>
 	</p:tabView>
 
 	<p:separator />
@@ -48,12 +68,7 @@
 				<!-- 				</h:panelGrid> -->
 			</c:when>
 			<c:otherwise>
-				<h:panelGrid columns="2" cellpadding="5">
-					<p:commandButton action="#{navigation.accueilAuth}"
-						value="Mon compte" icon="ui-icon-person" styleClass="compte" />
-					<p:commandButton action="#{authentificated.logoutPerson}"
-						value="Deconnexion" icon="ui-icon-circle-close" styleClass="dec" />
-				</h:panelGrid>
+
 			</c:otherwise>
 		</c:choose>
 	</h:form>

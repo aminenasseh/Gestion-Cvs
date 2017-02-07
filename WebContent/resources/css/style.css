@@ -9,7 +9,6 @@ body {
 /* form { */
 /* 	background-color:  #8cabb5; */
 /* } */
-
 table {
 	border-collapse: collapse;
 	border: 1px solid black;
@@ -25,6 +24,23 @@ td, th {
 	min-height: 600px;
 	margin-left: 50px;
 	margin-right: 50px"
+}
+
+.formConnexion {
+	margin: 0 auto;
+}
+
+.compte {
+	float: left;
+}
+
+.dec {
+	margin-left: 850;
+}
+
+.ui-layout, .ui-layout-doc, .ui-layout-unit, .ui-layout-wrap,
+	.ui-layout-bd, .ui-layout-hd {
+	border: none;
 }
 
 #header {

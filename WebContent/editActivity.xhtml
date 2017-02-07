@@ -1,0 +1,56 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<c:set var="validated" value="#{authentificated.validateActivity}" />
+
+<h:form>
+	<p:growl id="msgs" showDetail="true" />
+
+	<p:panel>
+
+		<h:panelGrid columns="1" cellpadding="4">
+
+			<h:outputLabel for="nature" value="Nature:" />
+			<p:inputText id="nature" cols="33" value="#{validated.nature}"
+				label="Nature" />
+			<p:message for="nature" />
+
+			<h:outputLabel for="title" value="Titre:" />
+			<p:inputText id="title" cols="33" value="#{validated.title}"
+				label="Titre" />
+			<p:message for="title" />
+
+			<h:outputLabel for="year" value="Année:" />
+			<p:calendar id="year" locale="fr" navigator="true" cols="33"
+				pattern="dd-MM-yyyy" value="#{validated.year}" />
+			<p:message for="year" />
+
+			<h:outputLabel for="webAddress" value="WebAddress:" />
+			<p:inputTextarea id="webAddress" rows="2" cols="33"
+				value="#{validated.webAddress}" label="WebAddress" />
+			<p:message for="webAddress" />
+
+			<h:outputLabel for="description" value="Description:" />
+			<p:inputTextarea id="description" rows="4" cols="33"
+				value="#{validated.description}" label="Description" />
+			<p:message for="description" />
+
+		</h:panelGrid>
+
+	</p:panel>
+	<p:dialog modal="true" resizable="false" header="Values"
+		widgetVar="dlg" showEffect="fold">
+		<p:panelGrid id="display" columns="2" columnClasses="label,value">
+			<h:outputText value="Année:" />
+			<h:outputText value="#{validated.year}">
+				<f:convertDateTime pattern="dd/MM/yyyy" />
+			</h:outputText>
+		</p:panelGrid>
+	</p:dialog>
+
+</h:form>
+</html>
