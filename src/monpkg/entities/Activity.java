@@ -39,17 +39,11 @@ public class Activity implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Nature nature;
 
-	@Column
-	@NotNull
-	@Size(min = 5, max = 200)
+
 	private String title;
-	@Column
-	@NotNull
-	@Size(min = 5, max = 200)
+
 	private String description;
-	@Column
-	@NotNull
-	@Size(min = 5, max = 200)
+
 	private String webAddress;
 
 	@ManyToOne(cascade = { CascadeType.MERGE })

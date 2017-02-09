@@ -27,7 +27,7 @@ public class PersonValidator implements Serializable {
 	private String email;
 
 	@Pattern(regexp = "(www.)?([a-zA-Z0-9]+).[a-zA-Z0-9]*.[a-z]{3}.?([a-z]+)?", message = "Cet URL n'est pas valide")
-	private String webAddress;
+	private String webSite;
 
 	@Past
 	private Date birthday;
@@ -55,10 +55,6 @@ public class PersonValidator implements Serializable {
 		return password;
 	}
 
-	public String getWebAddress() {
-		return webAddress;
-	}
-
 	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
 	}
@@ -79,8 +75,12 @@ public class PersonValidator implements Serializable {
 		this.password = password;
 	}
 
-	public void setWebAddress(String webAddress) {
-		this.webAddress = webAddress;
+	public String getWebSite() {
+		return webSite;
+	}
+
+	public void setWebSite(String webSite) {
+		this.webSite = webSite;
 	}
 
 }

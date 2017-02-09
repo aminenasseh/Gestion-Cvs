@@ -42,6 +42,12 @@ public class ActivityManager {
 		Query query = null;
 		try {
 			query = em.createQuery("SELECT a FROM Activity a");
+
+			// query.setParameter("id", authPerson.getIdPerson());
+			// query = em.createQuery("SELECT a FROM Activity a WHERE
+			// a.person.idPerson = :id ");
+
+			System.out.println("=====================>" + authPerson.getIdPerson());
 		} catch (NoResultException e) {
 			return null;
 		}

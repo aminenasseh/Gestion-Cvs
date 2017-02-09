@@ -12,11 +12,12 @@
 
 	<p:panel>
 
-		<h:panelGrid columns="1" cellpadding="4">
+		<h:panelGrid columns="1" cellpadding="5">
 
 			<h:outputLabel for="nature" value="Nature:" />
-			<p:inputText id="nature" cols="33" value="#{validated.nature}"
-				label="Nature" />
+			<p:selectOneMenu id="nature" value="#{validated.nature}">
+				<f:selectItems value="#{authentificated.natureActivity}" />
+			</p:selectOneMenu>
 			<p:message for="nature" />
 
 			<h:outputLabel for="title" value="Titre:" />
@@ -30,7 +31,7 @@
 			<p:message for="year" />
 
 			<h:outputLabel for="webAddress" value="WebAddress:" />
-			<p:inputTextarea id="webAddress" rows="2" cols="33"
+			<p:inputTextarea id="webAddress" cols="33"
 				value="#{validated.webAddress}" label="WebAddress" />
 			<p:message for="webAddress" />
 
@@ -40,7 +41,11 @@
 			<p:message for="description" />
 
 		</h:panelGrid>
-
+		<p:commandButton value="Enregister" ajax="true" icon="ui-icon-check"
+			validateClient="true" actionListener="#{authentificated.addActivity}"
+			update="msgs">
+			<p:ajax oncomplete="#{navigation.accueilAuth()}"></p:ajax>
+		</p:commandButton>
 	</p:panel>
 	<p:dialog modal="true" resizable="false" header="Values"
 		widgetVar="dlg" showEffect="fold">

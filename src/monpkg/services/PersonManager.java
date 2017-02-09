@@ -122,7 +122,29 @@ public class PersonManager {
 		}
 		return null;
 	}
+	
+	/**
+	 * Find by title.
+	 *
+	 * @param title
+	 *            the title
+	 * @return the list
+	 */
+	public List<Person> search(String title) {
+		Query query = null;
+		try {
+			query = em.createQuery("SELECT DISTINCT p FROM Activity a, Person p WHERE a.title LIKE'%" + title + "%' AND p.idPerson = a.person.idPerson");
+		} catch (NoResultException e) {
+			return null;
+		}
+		if (query != null) {
+			return query.getResultList();
+		}
+		return null;
+	}
 
+	/* ************************************************************************************************* */
+	
 	/**
 	 * Find by title.
 	 *
@@ -133,7 +155,7 @@ public class PersonManager {
 	public List<Activity> findActivityByTitle(String title) {
 		Query query = null;
 		try {
-			query = em.createQuery("SELECT a FROM Activity a WHERE a.title LIKE'%" + title + "%'");
+			query = em.createQuery("SELECT p FROM Activity a, Person p WHERE a.title LIKE'%" + title + "%' AND p.idPerson = a.person.idPerson");
 		} catch (NoResultException e) {
 			return null;
 		}

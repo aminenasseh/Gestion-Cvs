@@ -9,8 +9,8 @@ public class Navigation {
 		return "showPerson";
 	}
 
-	public String editPerson() {
-		return "editPerson?faces-redirect=true";
+	public String savePerson() {
+		return "savePerson?faces-redirect=true";
 	}
 
 	public String showPersons() {

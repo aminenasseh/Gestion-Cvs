@@ -13,17 +13,27 @@
 		<ui:define name="content">
 			<p:layoutUnit id="content" position="center">
 				<h:form>
-					<p:panel header="Resultat de la recherche ">
+					<p:tabView>
+						<p:tab title="Resultat de la recherche ">
 
-						<ui:repeat var="a" value="#{person.theActivities}">
-							<h:panelGrid columns="3" cellpadding="5">
-								<h:outputText value="Titre:" />
-								<h:outputText id="title" value="#{a.title}" />
-								<h:commandLink action="#{person.show(a.person)}"
-									value="Voir le CV" />
-							</h:panelGrid>
-						</ui:repeat>
-					</p:panel>
+							<c:choose>
+								<c:when test="#{empty person.resultSearch}">
+									<h:panelGrid columns="1" cellpadding="5">
+										<h:outputText value="0 resultat trouvé" />
+									</h:panelGrid>
+								</c:when>
+								<c:otherwise>
+									<ui:repeat var="a" value="#{person.resultSearch}">
+										<h:panelGrid columns="2" cellpadding="5">
+											<h:outputText id="title" value="#{a.name} #{a.firstName}" />
+											<h:commandLink action="#{person.show(a)}" value="Voir le CV" />
+										</h:panelGrid>
+									</ui:repeat>
+								</c:otherwise>
+							</c:choose>
+
+						</p:tab>
+					</p:tabView>
 				</h:form>
 			</p:layoutUnit>
 		</ui:define>

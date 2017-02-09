@@ -13,6 +13,8 @@ import monpkg.entities.Nature;
 @ManagedBean
 public class ActivityValidator {
 
+	private Integer idActivity;
+
 	@Enumerated(EnumType.STRING)
 	private Nature nature;
 
@@ -27,6 +29,14 @@ public class ActivityValidator {
 
 	@Size(min = 5, max = 200, message = "L'adresse web d'une activite: min 5 car, max 50 car")
 	private String webAddress;
+
+	public Integer getIdActivity() {
+		return idActivity;
+	}
+
+	public void setIdActivity(Integer idActivity) {
+		this.idActivity = idActivity;
+	}
 
 	public String getWebAddress() {
 		return webAddress;

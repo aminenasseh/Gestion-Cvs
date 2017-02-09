@@ -17,95 +17,241 @@
 				<p:tab title="Informations detaillées">
 					<h:form id="form">
 
-						<h:panelGrid columns="2" style="width:100%">
-							<!-- 						<p:commandLink id="actLink" -->
-							<!-- 							value="#{person.thePerson.name} #{person.thePerson.firstName}" /> -->
+						<h:panelGrid columns="1" style="width:100%">
 							<p:outputPanel>
-								<h:panelGrid columns="2" cellpadding="5">
+								<h:panelGrid columns="2" cellpadding="4" style="width:100%">
 									<h:outputText value="Nom:" />
-									<h:outputText value="#{person.thePerson.name}" />
+									<h:outputText value="#{person.thePerson.name}"
+										style="width:100%" />
 
 									<h:outputText value="Prenom:" />
-									<h:outputText value="#{person.thePerson.firstName}" />
+									<h:outputText value="#{person.thePerson.firstName}"
+										style="width:100%" />
 
 									<h:outputText value="Date de naissance:" />
-									<h:outputText value="#{person.thePerson.birthday}" />
+									<h:outputText value="#{person.thePerson.birthday}"
+										style="width:100%" />
 
 									<h:outputText value="Site Web:" />
-									<h:outputText value="#{person.thePerson.webSite}" />
+									<h:outputText value="#{person.thePerson.webSite}"
+										style="width:100%" />
 								</h:panelGrid>
 							</p:outputPanel>
 						</h:panelGrid>
-						<hr />
-						<p:tabView>
-							<p:tab title="FORMATIONS">
-								<h:panelGrid columns="2" style="width:100%">
-									<ui:repeat var="a" value="#{person.activitiesPerson}">
-										<!-- 							<c:if test="${a.person.idPerson == person.thePerson.idPerson}"> -->
-										<h:panelGrid columns="2" cellpadding="5">
-											<h:outputText value="Nature:" />
-											<h:outputText value="#{a.nature}" />
-
-											<h:outputText value="Titre:" />
-											<h:outputText value="#{a.title}" />
-
-											<h:outputText value="Annee:" />
-											<h:outputText value="#{a.year}" />
-
-											<h:outputText value="Description:" />
-											<h:outputText value="#{a.description}" />
-
-										</h:panelGrid>
-										<!-- 							</c:if> -->
-									</ui:repeat>
-								</h:panelGrid>
-							</p:tab>
-							<p:tab title="EXPERIENCES_PROFESSIONNELLES">
-							</p:tab>
-							<p:tab title="COMPETENCES">
-							</p:tab>
-							<p:tab title="LANGUES">
-							</p:tab>
-							<p:tab title="CENTRES_DINTERETS">
-							</p:tab>
-						</p:tabView>
 					</h:form>
+					<hr />
+					<p:tabView>
+						<p:tab title="EXPERIENCES_PRO">
+							<h:form>
+								<c:forEach var="a" items="#{person.activitiesPerson}">
+									<c:choose>
+										<c:when test="#{a.nature eq 'EXPERIENCES_PROFESSIONNELLES' }">
+											<h:panelGrid columns="1" style="width:100%"
+												columnClasses="logo,detail">
+												<p:outputPanel>
+													<h:panelGrid columns="2" cellpadding="5">
+														<h:outputText value="Nature:" />
+														<h:outputText value="#{a.nature}"
+															style="font-weight: bold" />
+
+														<h:outputText value="Annee:" />
+														<h:outputText value="#{a.year}" style="font-weight: bold" />
+
+														<h:outputText value="Titre:" />
+														<h:outputText value="#{a.title}" style="font-weight: bold" />
+
+
+														<h:outputText value="Site Web:" />
+														<h:outputText value="#{a.webAddress}"
+															style="font-weight: bold" />
+
+
+														<h:outputText value="Description:" />
+														<h:outputText value="#{a.description}"
+															style="font-weight: bold" />
+													</h:panelGrid>
+												</p:outputPanel>
+											</h:panelGrid>
+											<hr />
+										</c:when>
+									</c:choose>
+								</c:forEach>
+								<c:otherwise>
+
+								</c:otherwise>
+							</h:form>
+						</p:tab>
+
+						<p:tab title="FORMATIONS">
+							<h:form>
+								<c:forEach var="a" items="#{person.activitiesPerson}">
+									<c:choose>
+										<c:when test="#{a.nature eq 'FORMATIONS' }">
+											<h:panelGrid columns="1" style="width:100%"
+												columnClasses="logo,detail">
+												<p:outputPanel>
+													<h:panelGrid columns="2" cellpadding="5">
+														<h:outputText value="Nature:" />
+														<h:outputText value="#{a.nature}"
+															style="font-weight: bold" />
+
+														<h:outputText value="Annee:" />
+														<h:outputText value="#{a.year}" style="font-weight: bold" />
+
+														<h:outputText value="Titre:" />
+														<h:outputText value="#{a.title}" style="font-weight: bold" />
+
+
+														<h:outputText value="Site Web:" />
+														<h:outputText value="#{a.webAddress}"
+															style="font-weight: bold" />
+
+
+														<h:outputText value="Description:" />
+														<h:outputText value="#{a.description}"
+															style="font-weight: bold" />
+													</h:panelGrid>
+												</p:outputPanel>
+											</h:panelGrid>
+											<hr />
+										</c:when>
+									</c:choose>
+								</c:forEach>
+								<c:otherwise>
+									<!-- 									<h:outputText value="Pas de Nature : FORMATIONS" /> -->
+								</c:otherwise>
+
+							</h:form>
+						</p:tab>
+
+						<p:tab title="COMPETENCES">
+							<h:form>
+								<c:forEach var="a" items="#{person.activitiesPerson}">
+									<c:choose>
+										<c:when test="#{a.nature eq 'COMPETENCES' }">
+											<h:panelGrid columns="1" style="width:100%"
+												columnClasses="logo,detail">
+												<p:outputPanel>
+													<h:panelGrid columns="2" cellpadding="5">
+														<h:outputText value="Nature:" />
+														<h:outputText value="#{a.nature}"
+															style="font-weight: bold" />
+
+														<h:outputText value="Annee:" />
+														<h:outputText value="#{a.year}" style="font-weight: bold" />
+
+														<h:outputText value="Titre:" />
+														<h:outputText value="#{a.title}" style="font-weight: bold" />
+
+
+														<h:outputText value="Site Web:" />
+														<h:outputText value="#{a.webAddress}"
+															style="font-weight: bold" />
+
+
+														<h:outputText value="Description:" />
+														<h:outputText value="#{a.description}"
+															style="font-weight: bold" />
+													</h:panelGrid>
+												</p:outputPanel>
+											</h:panelGrid>
+											<hr />
+										</c:when>
+									</c:choose>
+								</c:forEach>
+								<c:otherwise>
+									<!-- 									<h:outputText value="Pas de Nature : COMPETENCES" /> -->
+								</c:otherwise>
+
+							</h:form>
+						</p:tab>
+
+						<p:tab title="LANGUES">
+							<h:form>
+								<c:forEach var="a" items="#{person.activitiesPerson}">
+									<c:choose>
+										<c:when test="#{a.nature eq 'LANGUES' }">
+											<h:panelGrid columns="1" style="width:100%"
+												columnClasses="logo,detail">
+												<p:outputPanel>
+													<h:panelGrid columns="2" cellpadding="5">
+														<h:outputText value="Nature:" />
+														<h:outputText value="#{a.nature}"
+															style="font-weight: bold" />
+
+														<h:outputText value="Annee:" />
+														<h:outputText value="#{a.year}" style="font-weight: bold" />
+
+														<h:outputText value="Titre:" />
+														<h:outputText value="#{a.title}" style="font-weight: bold" />
+
+
+														<h:outputText value="Site Web:" />
+														<h:outputText value="#{a.webAddress}"
+															style="font-weight: bold" />
+
+
+														<h:outputText value="Description:" />
+														<h:outputText value="#{a.description}"
+															style="font-weight: bold" />
+													</h:panelGrid>
+												</p:outputPanel>
+											</h:panelGrid>
+											<hr />
+										</c:when>
+									</c:choose>
+								</c:forEach>
+								<c:otherwise>
+									<!-- 									<h:outputText value="Pas de Nature : LANGUES" /> -->
+								</c:otherwise>
+
+							</h:form>
+						</p:tab>
+
+						<p:tab title="CENTRES_DINTERETS">
+							<h:form>
+								<c:forEach var="a" items="#{person.activitiesPerson}">
+									<c:choose>
+										<c:when test="#{a.nature eq 'CENTRES_DINTERETS' }">
+											<h:panelGrid columns="1" style="width:100%"
+												columnClasses="logo,detail">
+												<p:outputPanel>
+													<h:panelGrid columns="2" cellpadding="5">
+														<h:outputText value="Nature:" />
+														<h:outputText value="#{a.nature}"
+															style="font-weight: bold" />
+
+														<h:outputText value="Annee:" />
+														<h:outputText value="#{a.year}" style="font-weight: bold" />
+
+														<h:outputText value="Titre:" />
+														<h:outputText value="#{a.title}" style="font-weight: bold" />
+
+
+														<h:outputText value="Site Web:" />
+														<h:outputText value="#{a.webAddress}"
+															style="font-weight: bold" />
+
+
+														<h:outputText value="Description:" />
+														<h:outputText value="#{a.description}"
+															style="font-weight: bold" />
+													</h:panelGrid>
+												</p:outputPanel>
+											</h:panelGrid>
+											<hr />
+										</c:when>
+									</c:choose>
+								</c:forEach>
+								<c:otherwise>
+									<!-- 									<h:outputText value="Pas de Nature : CENTRES_DINTERETS" /> -->
+								</c:otherwise>
+							</h:form>
+						</p:tab>
+					</p:tabView>
 				</p:tab>
 			</p:tabView>
 
-			<!-- 				<h:panelGrid columns="2" style="width:100%"> -->
-			<!-- 					<h:panelGrid columns="2" cellpadding="5"> -->
-			<!-- 						<h:outputText value="Nom:" /> -->
-			<!-- 						<h:outputText value="#{person.thePerson.name}" /> -->
-
-			<!-- 						<h:outputText value="Prenom:" /> -->
-			<!-- 						<h:outputText value="#{person.thePerson.firstName}" /> -->
-
-			<!-- 						<h:outputText value="Date de naissance:" /> -->
-			<!-- 						<h:outputText value="#{person.thePerson.birthday}" /> -->
-
-			<!-- 						<h:outputText value="Site Web:" /> -->
-			<!-- 						<h:outputText value="#{person.thePerson.webSite}" /> -->
-			<!-- 					</h:panelGrid> -->
-			<!-- 					<f:facet name="header"> Acitivité(s) </f:facet> -->
-			<!-- 					<ui:repeat var="a" value="#{person.activities}"> -->
-			<!-- 						<h:panelGrid columns="2" cellpadding="5"> -->
-			<!-- 							<h:outputText value="Nature:" /> -->
-			<!-- 							<h:outputText value="#{a.nature}" /> -->
-
-			<!-- 							<h:outputText value="Titre:" /> -->
-			<!-- 							<h:outputText value="#{a.title}" /> -->
-
-			<!-- 							<h:outputText value="Annee:" /> -->
-			<!-- 							<h:outputText value="#{a.year}" /> -->
-
-			<!-- 							<h:outputText value="Description:" /> -->
-			<!-- 							<h:outputText value="#{a.description}" /> -->
-
-			<!-- 						</h:panelGrid> -->
-			<!-- 					</ui:repeat> -->
-			<!-- 				</h:panelGrid> -->
-			<!-- 				<hr /> -->
 		</p:layoutUnit>
 	</ui:define>
 </ui:composition>

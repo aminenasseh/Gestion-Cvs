@@ -6,7 +6,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,7 +15,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.*;
 
 @Entity
 @Table(name = "persons")
@@ -31,32 +29,17 @@ public class Person implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idPerson;
 
-	@Column
-	@NotNull
-	@Size(min = 5, max = 20)
 	private String name;
 
-	@Column
-	@NotNull
-	@Size(min = 5, max = 20)
 	private String firstName;
 
-	@Column
-	@NotNull
-	@Size(min = 20, max = 40)
 	private String email;
 
-	@Column
-	@NotNull
-	@Size(min = 5, max = 20)
 	private String webSite;
 
 	@Temporal(TemporalType.DATE)
 	private Date birthday;
 
-	@Column
-	@NotNull
-	@Size(min = 3, max = 20)
 	private String password;
 
 	@OneToMany(mappedBy = "person", cascade = { CascadeType.MERGE, CascadeType.REMOVE })

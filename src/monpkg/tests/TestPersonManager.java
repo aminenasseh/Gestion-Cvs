@@ -134,10 +134,12 @@ public class TestPersonManager {
 	/**
 	 * Find by title.
 	 */
-	@Test
-	public void findActivityByTitle() {
-		List<Activity> personActivities = personManager.findActivityByTitle("Développeur application Hybride");
-		assertEquals("Développeur application Hybride", personActivities.get(0).getTitle());
-	}
+	// @Test
+	// public void findActivityByTitle() {
+	// List<Activity> personActivities =
+	// personManager.findActivityByTitle("Développeur application Hybride");
+	// assertEquals("Développeur application Hybride",
+	// personActivities.get(0).getTitle());
+	// }
 
 }

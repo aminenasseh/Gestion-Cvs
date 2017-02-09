@@ -18,16 +18,19 @@
 				<p:tabView>
 					<p:tab title="La liste des Personnes">
 						<h:form>
-							<ui:repeat var="p" value="#{person.persons}">
-								<ul>
-									<li>
-										<p>
-											<h:commandLink action="#{person.show(p)}"
-												value="#{p.name} #{p.firstName}" />
-										</p>
-									</li>
-								</ul>
-							</ui:repeat>
+
+							<p:dataTable var="p" value="#{person.persons}" rows="10"
+								paginator="true"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								rowsPerPageTemplate="5,10,15">
+
+								<p:column headerText="Id">
+									<h:commandLink action="#{person.show(p)}"
+										value="#{p.name} #{p.firstName}" />
+								</p:column>
+
+							</p:dataTable>
+
 						</h:form>
 					</p:tab>
 				</p:tabView>

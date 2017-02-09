@@ -8,64 +8,63 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
-<p:layoutUnit id="menu" position="east" resizable="true" size="250"
+<p:layoutUnit id="menu" position="east" resizable="true" size="280"
 	minSize="40" maxSize="300">
+	<h:form>
+		<p:tabView>
+			<p:tab title="Menu">
 
-	<p:tabView>
-		<p:tab title="Menu">
-			<h:form>
-				<ul>
-					<li><p:commandLink action="navigation.accueil" value="Accueil"
-							icon="ui-icon-home" /></li>
+				<c:set var="u" value="#{authentificated.authPerson}" />
+				<c:set var="validated" value="#{authentificated.validatePerson}" />
+				<c:choose>
+					<c:when test="${u.idPerson ne 00}">
+						<p:commandButton action="#{navigation.accueil}" value="Accueil"
+							icon="ui-icon-home" styleClass="dec" />
+						<p:commandButton action="#{navigation.accueilAuth}" value="Profil"
+							icon="ui-icon-person" styleClass="dec" />
+						<p:commandButton action="#{authentificated.logoutPerson()}"
+							value="Deconnexion" icon="ui-icon-circle-close" styleClass="dec" />
+					</c:when>
+					<c:otherwise>
+						<ul>
+							<li><p:commandLink action="#{navigation.accueil}"
+									value="Accueil" icon="ui-icon-home" /></li>
 
-					<li><p:commandLink action="navigation.showPersons"
-							value="Lister les CVs" icon="ui-icon-arrowreturnthink-1-e" /></li>
+							<li><p:commandLink action="#{navigation.showPersons}"
+									value="Lister les CVs" icon="ui-icon-arrowreturnthink-1-e" /></li>
 
-					<li><p:commandLink action="navigation.editPerson"
-							value="Créer un compte" icon="ui-icon-person" /></li>
-				</ul>
-			</h:form>
-		</p:tab>
-		<p:tab title="Compte">
-			<c:set var="u" value="#{authentificated.authPerson}" />
-			<c:set var="validated" value="#{authentificated.validatePerson}" />
-			<c:choose>
-				<c:when test="${u.idPerson ne 00}">
-					<ul>
-						<li><h:outputLabel for="name" value="Nom:" /></li>
-						<li><h:outputLabel for="firstName" value="Prénom:" /></li>
-						<li><h:outputLabel for="email" value="Email:" /></li>
-					</ul>
-					<p:commandButton action="#{authentificated.logoutPerson}"
-						value="Deconnexion" icon="ui-icon-circle-close" styleClass="dec" />
-				</c:when>
+							<li><p:commandLink action="#{navigation.savePerson}"
+									value="Créer un compte" icon="ui-icon-person" /></li>
+						</ul>
+					</c:otherwise>
 
-			</c:choose>
-			<c:otherwise>
+				</c:choose>
 
-			</c:otherwise>
 
-		</p:tab>
-	</p:tabView>
+			</p:tab>
+		</p:tabView>
+	</h:form>
 
 	<p:separator />
 
 	<h:form method="POST">
-		<p:growl id="growl" showDetail="true" sticky="true" />
 		<c:set var="u" value="#{authentificated.authPerson}" />
 		<c:choose>
 			<c:when test="${u.idPerson eq 00}">
-				<!-- 				<h:panelGrid columns="5" cellpadding="2" styleClass="formConnexion"> -->
-
-				<p:outputLabel>E-mail</p:outputLabel>
-				<p:inputText id="email" value="#{u.email}"></p:inputText>
-				<br />
-				<p:outputLabel>Mot de passe</p:outputLabel>
-				<p:password id="password" value="#{u.password}"></p:password>
-				<p:commandButton action="#{authentificated.authentificatedPerson()}"
-					value="Connexion" icon="ui-icon-check" validateClient="true"
-					update="growl" />
-				<!-- 				</h:panelGrid> -->
+				<p:tabView>
+					<p:tab title="Connexion">
+						<p:growl id="growl" showDetail="true" sticky="true" />
+						<p:outputLabel>E-mail</p:outputLabel>
+						<p:inputText id="email" value="#{u.email}"></p:inputText>
+						<br />
+						<p:outputLabel>Mot de passe</p:outputLabel>
+						<p:password id="password" value="#{u.password}"></p:password>
+						<p:commandButton
+							action="#{authentificated.authentificatedPerson()}"
+							value="Connexion" icon="ui-icon-check" validateClient="true"
+							update="growl" />
+					</p:tab>
+				</p:tabView>
 			</c:when>
 			<c:otherwise>
 
